@@ -13,6 +13,7 @@
     "big.js": "^6.2.1",
     "mathjs": "^12.3.0",
     "miller-rabin": "^4.0.1",
+    "performance-now": "^2.1.0",
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
