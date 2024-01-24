@@ -32,3 +32,6 @@ pkg/
 *.dll
 *.so
 *.dylib
+
+*.idea/
+*.vscode/
