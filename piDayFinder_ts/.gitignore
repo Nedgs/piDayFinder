@@ -1,0 +1,34 @@
+# TypeScript
+dist/
+node_modules/
+*.js
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.pyz
+*.pyw
+*.egg-info/
+dist/
+build/
+*.egg
+*.egg-info
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.pyz
+*.pyw
+
+# Golang
+bin/
+pkg/
+*.exe
+*.dll
+*.so
+*.dylib
