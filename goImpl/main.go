@@ -45,7 +45,7 @@ func main() {
 	go findPattern(content, []byte(birthdate))
 	go findPattern([]byte(piStr), []byte(birthdate))
 
-	time.Sleep(30 * time.Second)
+	time.Sleep(60 * time.Minute)
 
 }
 
