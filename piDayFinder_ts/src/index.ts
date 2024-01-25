@@ -17,7 +17,6 @@ function findPosition(birthDate: string, filePath: string): number | undefined {
 }
 
 const birthDateToSearch = readlineSync.question('Enter your birth date (MMDD): ');
-
 const suite = new Benchmark.Suite();
 
 // Add a test to the suite

@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/index.ts",
+    "profile": "clinic doctor --on-port 3000 -- node --inspect=5858 src/index.js C:\\Users\\nader\\workspace\\piDayFinder\\pi.txt"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autocannon": "^7.14.0",
     "benchmark": "^2.1.4",
     "big.js": "^6.2.1",
     "chart.js": "^4.4.1",
+    "clinic": "^13.0.0",
     "k6": "^0.0.0",
     "mathjs": "^12.3.0",
     "miller-rabin": "^4.0.1",
