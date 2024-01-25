@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"math"
+	"math/big"
 	"os"
 	"regexp"
 )
@@ -35,8 +37,11 @@ func main() {
 		}
 	}
 
+	precision := 1000000
+	pi := calculatePi(precision)
+	piStr := pi.Text('f', precision)
 	go findPattern(content, []byte(birthdate))
-	go findPattern([]byte(content), []byte(birthdate))
+	go findPattern([]byte(piStr), []byte(birthdate))
 
 }
 
@@ -63,4 +68,29 @@ func findPattern(data []byte, pattern []byte) {
 	} else {
 		fmt.Printf("Pattern '%s' not found.\n", pattern)
 	}
+}
+
+func calculatePi(precision int) *big.Float {
+	a0 := big.NewFloat(1)
+	b0 := new(big.Float).SetFloat64(1 / math.Sqrt2)
+	t0 := new(big.Float).SetFloat64(0.25)
+	p0 := big.NewFloat(1)
+
+	for i := 0; i < precision; i++ {
+		an := new(big.Float).Add(a0, b0)
+		an.Quo(an, big.NewFloat(2))
+		bn := new(big.Float).Mul(a0, b0)
+		bn.Sqrt(bn)
+		tn := new(big.Float).Sub(a0, an)
+		tn.Mul(tn, tn)
+		tn.Mul(p0, tn)
+		pn := new(big.Float).Add(p0, p0)
+		a0, b0, t0, p0 = an, bn, tn, pn
+	}
+
+	pi := new(big.Float).Add(a0, b0)
+	pi.Mul(pi, pi)
+	pi.Quo(pi, t0)
+
+	return pi
 }
