@@ -6,11 +6,19 @@ import (
 	"fmt"
 	"math"
 	"math/big"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"regexp"
+	"time"
 )
 
 func main() {
+
+	go func() {
+		http.ListenAndServe("localhost:8080", nil)
+	}()
+
 	content, err := readFileContent("../pi.txt")
 
 	if err != nil {
@@ -18,17 +26,14 @@ func main() {
 		os.Exit(2)
 	}
 
-	//precision := 1000000
-	//pi := new(big.Float).SetPrec(uint(precision)).Set(big.Pi)
-	// Convertir le résultat en format texte avec la précision spécifiée
-	//piStr := pi.Text('f', precision)
-
-	fmt.Println(len(content))
+	precision := 1000000
+	pi := calculatePi(precision)
+	piStr := pi.Text('f', precision)
 
 	var birthdate string
 	var isValidDate = false
 	for !isValidDate {
-		fmt.Print("Enter your date of birth in the format DDMM: ")
+		fmt.Print("Enter your date of birth in the format DDMMYY: ")
 		fmt.Scanln(&birthdate)
 		isValidDate = isValidDateFormat(birthdate)
 
@@ -37,11 +42,10 @@ func main() {
 		}
 	}
 
-	precision := 1000000
-	pi := calculatePi(precision)
-	piStr := pi.Text('f', precision)
 	go findPattern(content, []byte(birthdate))
 	go findPattern([]byte(piStr), []byte(birthdate))
+
+	time.Sleep(30 * time.Second)
 
 }
 
