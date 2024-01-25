@@ -1,6 +1,8 @@
 import * as fs from 'fs';
 import * as readlineSync from 'readline-sync';
-import performanceNow from "performance-now";
+import { performance } from 'perf_hooks';
+// @ts-ignore
+import * as Benchmark from 'benchmark';
 
 function findPosition(birthDate: string, filePath: string): number | undefined {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
@@ -14,20 +16,29 @@ function findPosition(birthDate: string, filePath: string): number | undefined {
     }
 }
 
-const startTime = performanceNow();
-
-// Get user input for birthdate
 const birthDateToSearch = readlineSync.question('Enter your birth date (MMDD): ');
 
-const foundPosition = findPosition(birthDateToSearch, './../../pi.txt');
+const suite = new Benchmark.Suite();
 
-const endTime = performanceNow();
+// Add a test to the suite
+suite.add('findPosition', () => {
+    findPosition(birthDateToSearch, './../../pi.txt');
+});
 
-if (foundPosition !== undefined) {
-    console.log(`The position of ${birthDateToSearch} in the file is: ${foundPosition}`);
-} else {
-    console.log(`The number was not found in the file.`);
-}
+suite.on('cycle', (event: any) => {
+    console.log(String(event.target));
+});
+
+suite.on('complete', function () {
+    // @ts-ignore
+    console.log('Fastest is ' + this.filter('fastest').map('name'));
+});
+
+const startTime = performance.now();
+
+suite.run({ async: false });
+
+const endTime = performance.now();
 
 const executionTime = endTime - startTime;
-console.log(`execution time: ${executionTime} milliseconds`);
+console.log(`Total execution time: ${executionTime} milliseconds`);
