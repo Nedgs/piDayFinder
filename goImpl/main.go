@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"math/big"
 	"os"
 	"regexp"
 )
@@ -17,11 +16,10 @@ func main() {
 		os.Exit(2)
 	}
 
-	precision := 1000000
-	pi := new(big.Float).SetPrec(uint(precision)).Quo(big.NewFloat(22), piLeibniz(precision))
-
+	//precision := 1000000
+	//pi := new(big.Float).SetPrec(uint(precision)).Set(big.Pi)
 	// Convertir le résultat en format texte avec la précision spécifiée
-	piStr := pi.Text('f', precision)
+	//piStr := pi.Text('f', precision)
 
 	fmt.Println(len(content))
 
@@ -37,18 +35,9 @@ func main() {
 		}
 	}
 
-	index := findPattern(content, []byte(birthdate))
-	if index != -1 {
-		fmt.Printf("Pattern '%s' find at index %d.\n", birthdate, index)
-	} else {
-		fmt.Printf("Pattern '%s' not found.\n", birthdate)
-	}
-	index = findPattern([]byte(piStr), []byte(birthdate))
-	if index != -1 {
-		fmt.Printf("Pattern '%s' find at index %d.\n", birthdate, index)
-	} else {
-		fmt.Printf("Pattern '%s' not found.\n", birthdate)
-	}
+	go findPattern(content, []byte(birthdate))
+	go findPattern([]byte(content), []byte(birthdate))
+
 }
 
 func readFileContent(path string) ([]byte, error) {
@@ -67,22 +56,11 @@ func isValidDateFormat(date string) bool {
 	return regex.MatchString(date)
 }
 
-func findPattern(data []byte, pattern []byte) int {
-	return bytes.Index(data, pattern)
-}
-
-func piLeibniz(precision int) *big.Float {
-	pi := new(big.Float).SetPrec(uint(precision))
-	pi.SetInt64(0)
-	sign := 1.0
-	denom := new(big.Float).SetInt64(1)
-
-	for i := 0; i < precision; i++ {
-		term := new(big.Float).SetFloat64(sign).Quo(big.NewFloat(1), denom)
-		pi.Add(pi, term)
-		sign *= -1
-		denom.Add(denom, big.NewFloat(2))
+func findPattern(data []byte, pattern []byte) {
+	index := bytes.Index(data, pattern)
+	if index != -1 {
+		fmt.Printf("Pattern '%s' find at index %d.\n", pattern, index)
+	} else {
+		fmt.Printf("Pattern '%s' not found.\n", pattern)
 	}
-
-	return pi.Mul(pi, big.NewFloat(4))
 }
