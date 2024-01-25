@@ -16,7 +16,7 @@ function findPosition(birthDate: string, filePath: string): number | undefined {
 
 const startTime = performanceNow();
 
-// Get user input for birth date
+// Get user input for birthdate
 const birthDateToSearch = readlineSync.question('Enter your birth date (MMDD): ');
 
 const foundPosition = findPosition(birthDateToSearch, './../../pi.txt');
