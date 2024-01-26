@@ -2,7 +2,7 @@
 
 ## Présentation
 
-Le projet piBirthFinder a pour objectif de trouver la position d'une date de naissance donnée (au format JJMMAAAA) parmi les nombreuses décimales de π (pi). La génération directe de π en TypeScript s'est révélée complexe. Nous avons donc adopté une approche alternative : utiliser un fichier "pi.txt" préexistant, contenant déjà un million de décimales de π.
+Le projet piBirthFinder a pour objectif de trouver la position d'une date de naissance donnée (au format JJMMAAAA) parmi les nombreuses décimales de π (pi). La génération directe de π en TypeScript s'est révélée complexe vu la taille des décimales qu'on veut générer (1 million). Nous avons donc adopté une approche alternative : utiliser un fichier "pi.txt" préexistant, contenant déjà un million de décimales de π.
 
 ## Développement
 
