@@ -12,6 +12,26 @@ func BenchmarkFindPattern(b *testing.B) {
 	}
 }
 
+func BenchmarkCalculatePi(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		calculatePi(1000)
+	}
+}
+
+func BenchmarkIsValidDateFormat(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		isValidDateFormat("0101099")
+	}
+}
+
+func BenchmarkReadFileContent(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+		readFileContent("../pi.txt")
+	}
+
+}
+
 func TestIsValidDateFormat(t *testing.T) {
 	validDates := []string{"010101", "311299", "280222"}
 	invalidDates := []string{"0101", "3112", "28022", "abcd", "01/01/01"}
