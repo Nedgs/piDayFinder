@@ -8,7 +8,7 @@ Le projet piDayFinder a pour objectif de trouver la position d'une date de naiss
 
 ### Étape 1 : Choix du Projet
 
-Nous avons opté pour un projet original visant à rechercher une date de naissance dans les décimales de π. La génération directe de π s'est avérée difficile, d'où l'utilisation d'un fichier "pi.txt" préparé au préalable avec un million de chiffres.
+Nous avons opté pour un peu projet original visant à rechercher une date de naissance dans les décimales de π. La génération directe de π s'est avérée difficile, d'où l'utilisation d'un fichier "pi.txt" préparé au préalable avec un million de chiffres.
 
 ### Étape 2 : Mise en Œuvre en TypeScript
 
