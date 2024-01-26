@@ -32,6 +32,6 @@ La mise en œuvre en TypeScript comprend les étapes suivantes :
 - Mesure du temps d'execution time / pprof
 - Lancement de benchmarks
 
-Implémentation envisager mais pas mis en place :
-- Memoization : lancement de la méthode une unique fois avant fermeture du programme donc pas d'utilité
+Implémentations envisagées mais pas mis en place :
+- Memoization : lancement de la méthode une unique fois avant fermeture du programme donc pas d'utilité à cause de la destruction du cache 
 - Utilisation du design pattern semaphore. Fichier trop petit, gain de temps insignifiant + gestion des intersections compliquées pour pas grand chose
