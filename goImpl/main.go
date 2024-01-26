@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"math"
 	"math/big"
-	_ "net/http/pprof"
 	"os"
 	"regexp"
 )
