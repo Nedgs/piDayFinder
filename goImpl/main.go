@@ -6,37 +6,27 @@ import (
 	"fmt"
 	"math"
 	"math/big"
-	"net/http"
 	_ "net/http/pprof"
 	"os"
 	"regexp"
-	"time"
 )
 
 func main() {
 
-	go func() {
-		http.ListenAndServe("localhost:8080", nil)
-	}()
-
 	content, err := readFileContent("../pi.txt")
-
 	if err != nil {
 		fmt.Printf("Error during readFileContent execution: %s\n", err)
 		os.Exit(2)
 	}
-
 	precision := 1000000
 	pi := calculatePi(precision)
 	piStr := pi.Text('f', precision)
-
 	var birthdate string
 	var isValidDate = false
 	for !isValidDate {
 		fmt.Print("Enter your date of birth in the format DDMMYY: ")
 		fmt.Scanln(&birthdate)
 		isValidDate = isValidDateFormat(birthdate)
-
 		if !isValidDate {
 			fmt.Println("Invalid date format. Please use the format DDMMYY.")
 		}
@@ -44,8 +34,6 @@ func main() {
 
 	go findPattern(content, []byte(birthdate))
 	go findPattern([]byte(piStr), []byte(birthdate))
-
-	time.Sleep(60 * time.Minute)
 
 }
 
@@ -66,15 +54,12 @@ func isValidDateFormat(date string) bool {
 }
 
 func findPattern(data []byte, pattern []byte) {
-	start := time.Now()
-	fmt.Println(start)
 	index := bytes.Index(data, pattern)
 	if index != -1 {
 		fmt.Printf("Pattern '%s' find at index %d.\n", pattern, index)
 	} else {
 		fmt.Printf("Pattern '%s' not found.\n", pattern)
 	}
-	fmt.Println(time.Since(start))
 }
 
 func calculatePi(precision int) *big.Float {

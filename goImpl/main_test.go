@@ -4,6 +4,14 @@ import (
 	"testing"
 )
 
+func BenchmarkFindPattern(b *testing.B) {
+	data, _ := readFileContent("../pi.txt")
+	pattern := []byte("090698")
+	for i := 0; i < b.N; i++ {
+		findPattern(data, pattern)
+	}
+}
+
 func TestIsValidDateFormat(t *testing.T) {
 	validDates := []string{"010101", "311299", "280222"}
 	invalidDates := []string{"0101", "3112", "28022", "abcd", "01/01/01"}
