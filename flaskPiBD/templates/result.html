@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultat</title>
+</head>
+<body>
+    <h1>Resultat</h1>
+    {% if position == -1 %}
+        <p>La séquence n'a pas été trouvée dans les décimales de Pi.</p>
+    {% else %}
+        <p>La séquence <strong>{{ date_sequence }}</strong> a été trouvée à la position <strong>{{ position }}</strong> dans les décimales de Pi.</p>
+    {% endif %}
+    <a href="/">chercher à nouveau</a>
+</body>
+</html>
