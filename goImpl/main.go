@@ -6,12 +6,18 @@ import (
 	"fmt"
 	"math"
 	"math/big"
+	"net/http"
+	_ "net/http/pprof"
 	"os"
 	"regexp"
+	"time"
 )
 
 func main() {
 
+	go func() {
+		http.ListenAndServe("localhost:8080", nil)
+	}()
 	content, err := readFileContent("../pi.txt")
 	if err != nil {
 		fmt.Printf("Error during readFileContent execution: %s\n", err)
@@ -33,6 +39,8 @@ func main() {
 
 	go findPattern(content, []byte(birthdate))
 	go findPattern([]byte(piStr), []byte(birthdate))
+
+	time.Sleep(60 * time.Minute)
 
 }
 
