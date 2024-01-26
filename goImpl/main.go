@@ -66,12 +66,15 @@ func isValidDateFormat(date string) bool {
 }
 
 func findPattern(data []byte, pattern []byte) {
+	start := time.Now()
+	fmt.Println(start)
 	index := bytes.Index(data, pattern)
 	if index != -1 {
 		fmt.Printf("Pattern '%s' find at index %d.\n", pattern, index)
 	} else {
 		fmt.Printf("Pattern '%s' not found.\n", pattern)
 	}
+	fmt.Println(time.Since(start))
 }
 
 func calculatePi(precision int) *big.Float {
