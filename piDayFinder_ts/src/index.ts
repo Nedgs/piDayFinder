@@ -10,8 +10,10 @@ function findPosition(birthDate: string, filePath: string): number | undefined {
 
     if (position !== -1) {
         // Add 1 because positions start from 0
+        console.log(`Pattern '${birthDate}' found at index ${position + 1}.`);
         return position + 1;
     } else {
+        console.log(`Pattern '${birthDate}' not found.`);
         return undefined;
     }
 }
